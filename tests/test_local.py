@@ -1,5 +1,6 @@
 from agentkit.local import parse_completion
 from agentkit.mcp import McpHost
+from agentkit.retrieve import register_retrieve
 from agentkit.tools import ToolRegistry
 
 
@@ -31,3 +32,10 @@ def test_mcp_lists_and_rejects_unknown():
     names = {t["name"] for t in host.list_tools()}
     assert "echo" in names
     assert host.call_tool("rm", {})["error"] == "unknown_tool"
+
+
+def test_retrieve_registered():
+    reg = ToolRegistry()
+    register_retrieve(reg)
+    names = {t["name"] for t in McpHost(reg).list_tools()}
+    assert "retrieve" in names
