@@ -9,8 +9,8 @@ Production-shaped **agent backend** for Atlas. Not a notebook wrapper.
 - **Local models first.** Ollama / vLLM / llama.cpp `llama-server` over
   OpenAI-compat `/v1/chat/completions`. Cloud is `LLM_BASE_URL`, not a
   rewrite.
-- **Tools are the sandbox.** The model can `get_portfolio` and
-  `create_intent` against Atlas. It cannot see Postgres, Kafka, or RPC.
+- **Tools are the sandbox.** `get_portfolio`, `create_intent`, `retrieve`
+  (RAG over ADRs with citations). No Postgres, Kafka, or RPC.
 - **MCP-shaped host.** `GET /v1/tools`, `POST /v1/tools/{name}` so another
   runtime can attach without importing this package.
 - **Durable runs.** sqlite state, retries, `dead_letter`. CI uses `FakeLLM`.

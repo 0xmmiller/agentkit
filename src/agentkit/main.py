@@ -1,4 +1,5 @@
 from agentkit.atlas_tools import register_atlas_tools
+from agentkit.retrieve import register_retrieve
 from agentkit.local import llm_from_env
 from agentkit.mcp import McpHost
 from agentkit.models import Base, Run
@@ -18,6 +19,7 @@ SessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 app = FastAPI(title="AgentKit")
 TOOLS = ToolRegistry()
 register_atlas_tools(TOOLS)
+register_retrieve(TOOLS)
 MCP = McpHost(TOOLS)
 
 
